@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { customFetchUser } from '../../utils/axios'
 import {
   getUserFromLocalStorage,
+  removeUserFromLocalStorage,
   setUserInLocalStorage,
 } from '../../utils/localStorage'
 
@@ -51,7 +52,10 @@ const userSlice = createSlice({
     changeFormToggleState: (state) => {
       state.isMember = !state.isMember
     },
-    navigateUserToHome: (state) => {},
+    LogOutUser: (state) => {
+      state.serverUser = null
+      removeUserFromLocalStorage()
+    },
   },
   extraReducers: {
     [registerUserThunk.pending]: (state) => {
@@ -89,6 +93,7 @@ const userSlice = createSlice({
   },
 })
 
-export const { getFormInputValues, changeFormToggleState } = userSlice.actions
+export const { getFormInputValues, changeFormToggleState, LogOutUser } =
+  userSlice.actions
 
 export default userSlice.reducer

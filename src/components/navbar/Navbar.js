@@ -1,10 +1,14 @@
 import { React } from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
+import { AiOutlineLogout } from 'react-icons/ai'
 
 import { navLink } from '../../utils/data'
+import { LogOutUser } from '../../feature/user/userSlice'
+import { useDispatch } from 'react-redux'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   return (
     <Wrapper className='link-container'>
       {navLink.map((items) => {
@@ -16,6 +20,10 @@ const Navbar = () => {
           </NavLink>
         )
       })}
+      <NavLink to='/' onClick={() => dispatch(LogOutUser())}>
+        <AiOutlineLogout />
+        logOut
+      </NavLink>
     </Wrapper>
   )
 }

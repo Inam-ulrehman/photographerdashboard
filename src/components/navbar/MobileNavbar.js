@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { navLink } from '../../utils/data'
-import { AiOutlineMenuFold } from 'react-icons/ai'
+import { AiOutlineMenuFold, AiOutlineLogout } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
+import { LogOutUser } from '../../feature/user/userSlice'
 
 const MobileNavbar = () => {
+  const dispatch = useDispatch()
+
   const [value, setValue] = useState(true)
 
   const handleClick = () => {
@@ -27,6 +31,12 @@ const MobileNavbar = () => {
             </li>
           )
         })}
+        <li>
+          <NavLink onClick={() => dispatch(LogOutUser())} to='/'>
+            <AiOutlineLogout />
+            logOut
+          </NavLink>
+        </li>
       </ul>
     </Wrapper>
   )
